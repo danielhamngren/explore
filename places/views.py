@@ -16,7 +16,7 @@ def current_datetime(request):
 
 def places(request):
 
-    data = serializers.serialize('geojson', Places.objects.filter(amenity="cafe"))
+    data = serializers.serialize('geojson', Places.objects.all())
 
     return HttpResponse(data, content_type='application/json')
 
