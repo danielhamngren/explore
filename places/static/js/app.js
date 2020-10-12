@@ -16,12 +16,19 @@ xhr.onreadystatechange = function () {
 xhr.open('GET', "/api/mapbox_token", false);
 xhr.send();
 
+var bounds = [
+[13.004192 - 0.3, 55.604887 - 0.1], // Southwest coordinates
+[13.004192 + 0.3, 55.604887 + 0.1] // Northeast coordinates
+];
+
 var map = new mapboxgl.Map({
     container: 'map',
     // style: 'mapbox://styles/namatoj/ckfz2pspg0atf19nq973bxo3z', // stylesheet location
     style: 'mapbox://styles/namatoj/cii4mprxb0061b8lz7pt8athu', // stylesheet location
     center: [13.004192, 55.604887], // starting position [lng, lat]
-    zoom: 11 // starting zoom
+    zoom: 11, // starting zoom
+    minZoom: 10,
+    maxBounds: bounds,
 });
 
 let places_data = null;
