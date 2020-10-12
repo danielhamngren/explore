@@ -49,6 +49,12 @@ def register_visit(request):
     return HttpResponse(request.__str__())
 
 
+def remove_visit(request):
+    if request.method == 'GET':
+        Visit.objects.filter(user=request.user, place=request.GET["place"]).delete()
+    return HttpResponse("visit removed")
+
+
 def mapbox_token(request):
     return HttpResponse(settings.MAPBOX_TOKEN)
 

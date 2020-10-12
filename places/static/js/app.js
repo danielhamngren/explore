@@ -2,7 +2,7 @@ console.log("app.js successfully loaded lol");
 
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
-    if(xhr.readyState === XMLHttpRequest.DONE) {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
         var status = xhr.status;
         if (status === 0 || (status >= 200 && status < 400)) {
             // The request has been completed successfully
@@ -37,12 +37,12 @@ map.on('load', function () {
                 'http://192.168.64.2:8000/api/visits',
                 function (err, data) {
                     console.log(data);
-                    for(let j = 0; j < places_data.features.length; j++){
-                        for(let i = 0; i < data.length; i++){
-                            if(data[i].fields.place === places_data.features[j].properties.pk)
+                    for (let j = 0; j < places_data.features.length; j++) {
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].fields.place === places_data.features[j].properties.pk)
                                 places_data.features[j].properties.visited = 1;
-                            }
                         }
+                    }
                     map.getSource('places').setData(places_data);
                 });
 
@@ -118,6 +118,11 @@ function toggleMarker(identity) {
         if (places_data.features[i].properties.pk === identity) {
             if (places_data.features[i].properties.visited === 1) {
                 places_data.features[i].properties.visited = 0;
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                };
+                xhr.open('GET', `/api/remove_visit?place=${identity}`);
+                xhr.send()
             } else {
                 places_data.features[i].properties.visited = 1;
 
