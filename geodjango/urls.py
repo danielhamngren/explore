@@ -21,6 +21,7 @@ import places.views
 urlpatterns = [
     path('time/', places.views.current_datetime),
     path('api/places', places.views.places),
+    path('api/visits', places.views.visits),
     path('api/register_visit', places.views.register_visit),
     path('api/mapbox_token', places.views.mapbox_token),
     path('admin/', admin.site.urls),

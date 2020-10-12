@@ -32,8 +32,20 @@ map.on('load', function () {
         'http://192.168.64.2:8000/api/places',
         function (err, data) {
             if (err) throw err;
-
             places_data = data;
+            d3.json(
+                'http://192.168.64.2:8000/api/visits',
+                function (err, data) {
+                    console.log(data);
+                    for(let j = 0; j < places_data.features.length; j++){
+                        for(let i = 0; i < data.length; i++){
+                            if(data[i].fields.place === places_data.features[j].properties.pk)
+                                places_data.features[j].properties.visited = 1;
+                            }
+                        }
+                    map.getSource('places').setData(places_data);
+                });
+
             map.addSource('places', {
                 type: 'geojson',
                 data: places_data
@@ -80,6 +92,8 @@ map.on('load', function () {
                     'circle-stroke-opacity': 0.5,
                 }
             });
+
+
         }
     );
     map.on('click', 'places', function (e) {

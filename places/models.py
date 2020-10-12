@@ -21,7 +21,7 @@ class Places(models.Model):
 
 class Visit(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    place = models.ForeignKey(Places, on_delete=models.CASCADE)
+    place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='visits')
     date_visited = models.DateField(auto_now=True)
 
     def __str__(self):
