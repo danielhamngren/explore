@@ -30,18 +30,22 @@ var map = new mapboxgl.Map({
     minZoom: 10,
     maxBounds: bounds,
 });
+// disable map rotation using right click + drag
+map.dragRotate.disable();
 
+// disable map rotation using touch rotation gesture
+map.touchZoomRotate.disableRotation();
 let places_data = null;
 
 map.on('load', function () {
 // Add an image to use as a custom marker
     d3.json(
-        'http://192.168.64.2:8000/api/places',
+        '/api/places',
         function (err, data) {
             if (err) throw err;
             places_data = data;
             d3.json(
-                'http://192.168.64.2:8000/api/visits',
+                '/api/visits',
                 function (err, data) {
                     console.log(data);
                     for (let j = 0; j < places_data.features.length; j++) {

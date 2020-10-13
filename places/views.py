@@ -58,5 +58,6 @@ def remove_visit(request):
 def mapbox_token(request):
     return HttpResponse(settings.MAPBOX_TOKEN)
 
+
 def index(request):
     return render(request, 'index.html')
