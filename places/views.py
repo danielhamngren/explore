@@ -41,18 +41,19 @@ def visits(request):
 def register_visit(request):
     # TODO: Handle errors and edge cases here
     # TODO: If the user-place combination already exist, do not create a new one.
-    if request.method == 'GET':
+    if request.user.is_authenticated and request.method == 'GET':
         place = Places.objects.get(id=request.GET["place"])
         visit = Visit(user=request.user, place=place)
         visit.save()
-
-    return HttpResponse(request.__str__())
+        return HttpResponse(request.__str__())
+    return HttpResponse("User not authenticated or request error")
 
 
 def remove_visit(request):
-    if request.method == 'GET':
+    if request.user.is_authenticated and request.method == 'GET':
         Visit.objects.filter(user=request.user, place=request.GET["place"]).delete()
-    return HttpResponse("visit removed")
+        return HttpResponse("visit removed")
+    return HttpResponse("User not authenticated or request error")
 
 
 def mapbox_token(request):
