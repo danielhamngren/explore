@@ -33,6 +33,11 @@ var map = new mapboxgl.Map({
 // disable map rotation using right click + drag
 map.dragRotate.disable();
 
+map.addControl(new mapboxgl.ScaleControl({
+maxWidth: 80,
+unit: 'metric'
+}));
+map.addControl(new mapboxgl.NavigationControl());
 // disable map rotation using touch rotation gesture
 map.touchZoomRotate.disableRotation();
 let places_data = null;
