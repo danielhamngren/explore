@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/register_visit', places.views.register_visit),
     path('api/mapbox_token', places.views.mapbox_token),
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     re_path(r'^favicon\.ico$', favicon_view),
     path('', places.views.index, name='index')
