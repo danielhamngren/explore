@@ -8,6 +8,9 @@ world/
 # PyCharm files
 .idea/
 
+# collected static dir
+static/
+
 # apple/mac files
 .DS_Store
 
