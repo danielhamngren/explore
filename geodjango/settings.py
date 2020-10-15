@@ -29,7 +29,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv("DEBUG") == "True":
+    DEBUG = True
+else:
+    DEBUG = False
 
 
 # Application definition
