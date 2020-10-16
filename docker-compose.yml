@@ -14,7 +14,7 @@ services:
     command: gunicorn --certfile=/etc/certs/localhost.crt --keyfile=/etc/certs/localhost.key geodjango.wsgi -b 0.0.0.0:8000
     volumes:
       - .:/code
-      - ./config/nginx/certs/:/etc/certs/
+      - ./config/nginx/certs:/etc/certs/
     expose:
       - "443"
     depends_on:
@@ -30,6 +30,6 @@ services:
       - "80:80"
     volumes:
       - ./config/nginx/templates:/etc/nginx/templates
-      - ./config/nginx/certs/:/etc/nginx/conf.d/certs/
+      - ./config/nginx/certs:/etc/nginx/conf.d/certs/
     depends_on:
       - web
