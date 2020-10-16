@@ -11,6 +11,9 @@ world/
 # collected static dir
 static/
 
+# cert dir
+config/nginx/certs/
+
 # apple/mac files
 .DS_Store
 
