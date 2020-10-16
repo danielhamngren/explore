@@ -11,7 +11,7 @@ services:
 
   web:
     build: .
-    command: gunicorn --certfile=/etc/certs/localhost.crt --keyfile=/etc/certs/localhost.key geodjango.wsgi -b 0.0.0.0:8000
+    command: gunicorn --certfile=/etc/certs/${CERTNAME}.crt --keyfile=/etc/certs/${CERTNAME}.key geodjango.wsgi -b 0.0.0.0:8000
     volumes:
       - .:/code
       - ./config/nginx/certs/:/etc/certs/
