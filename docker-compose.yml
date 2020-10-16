@@ -21,7 +21,7 @@ services:
       - db
 
   nginx:
-    image: nginx:latest
+    image: nginx:1.19.3
     container_name: ng
     environment:
       NGINX_HOST: ${HOST}
