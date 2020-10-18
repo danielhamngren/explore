@@ -3,6 +3,13 @@ upstream web {
     server web:443;
 }
 
+# Requests using only IP returns 444 No Reponse
+server {
+    listen      80;
+    server_name "";
+    return      444;
+}
+
 # Redirect all HTTP requests to HTTPS
 server {
     listen 80;
