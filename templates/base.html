@@ -32,16 +32,25 @@
     </div>
 
     <div class="navbar-end">
-      <div class="navbar-item">
+        {% if user.is_authenticated %}
+
+
+            <div class="navbar-item">
+          <p>{{ user.username }} <a class="button is-small" href="{% url 'logout' %}">Log Out</a> </p>
+            </div>
+        {% else %}
+          <div class="navbar-item">
         <div class="buttons">
+
           <a class="button is-secondary is-small" href="/accounts/signup">
             <strong>Sign up</strong>
           </a>
-          <a class="button is-light is-small" href="/accounts/login/">
+          <a class="button is-light is-small" href="{% url 'login' %}">
             Log in
           </a>
         </div>
       </div>
+        {% endif %}
     </div>
   </div>
 </nav>
