@@ -33,13 +33,115 @@
         max-width: 400px;
         font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
+
+    #legend {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 3px;
+        top: 10px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        padding: 10px;
+        position: absolute;
+        left: 10px;
+        z-index: 1;
+        border-style: solid;
+        border-width: 1px;
+
+
+        height:12em;
+        width: 10em;
+        display: grid;
+         align-content: center;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        {#grid-template-areas:#}
+        {#    "title title title"#}
+        {#    "_ marked unmarked"#}
+        {#    "restaurant restaurant-visit-symbol restaurant-no-visit-symbol";#}
+        {#    "fast-food fast-food-visit-symbol fast-food-no-visit-symbol";#}
+        {#    "cafe cafe-visit-symbol cafe-no-visit-symbol";#}
+    }
+
+    #title {
+        text-align: center;
+        grid-column:1/4;
+    }
+
+    #marked {grid-area: 2/2;font-size: 0.7em;text-align: center;}
+    #unmarked {grid-area: 2/3; font-size: 0.7em;text-align: center;}
+    #restaurant {grid-column: 1/2;
+    grid-row: 3/4;font-size: 0.8em;}
+    #fast-food {grid-column: 1/2;
+    grid-row: 4/5;font-size: 0.8em;}
+    #cafe {grid-area: 5/1;font-size: 0.8em;}
+    #restaurant-visit-symbol {grid-area: 3/2;        text-align: center;}
+    #fast-food-visit-symbol {grid-area: 4/2;        text-align: center;}
+    #cafe-visit-symbol {grid-area: 5/2;        text-align: center;}
+    #restaurant-no-visit-symbol {grid-area: 3/3;        text-align: center;}
+    #fast-food-no-visit-symbol {grid-area: 4/3;        text-align: center;}
+    #cafe-no-visit-symbol {grid-area: 5/3;        text-align: center;}
 </style>
 
 <meta charset="UTF-8">
 {% endblock %}
 
 {% block content %}
-<div id='map'></div>
+
+<div id='map'>
+<div id='legend'>
+    <div id="title">
+        <strong>Legend</strong>
+    </div>
+    <div id="restaurant">
+        restaurant
+    </div>
+    <div id="fast-food">
+        fast food
+    </div>
+    <div id="cafe">
+        cafe
+    </div>
+    <div id="marked">
+        visited
+    </div>
+    <div id="unmarked">
+        not<br>visited
+    </div>
+    <div id="restaurant-visit-symbol">
+        <svg height="20" width="20">
+            <circle cx="10" cy="10" r="8" stroke="black" stroke-width="1" fill="#2222cc"/>
+        </svg>
+    </div>
+    <div id="restaurant-no-visit-symbol">
+        <svg height="20" width="20">
+            <circle cx="10" cy="10" r="8" stroke="black" stroke-width="1" fill="#2222cc" fill-opacity="0.3"/>
+        </svg>
+    </div>
+    <div id="fast-food-visit-symbol">
+        <svg height="20" width="20">
+            <circle cx="10" cy="10" r="8" stroke="black" stroke-width="1" fill="#cc2222"/>
+        </svg>
+    </div>
+    <div id="fast-food-no-visit-symbol">
+        <svg height="20" width="20">
+            <circle cx="10" cy="10" r="8" stroke="black" stroke-width="1" fill="#cc2222" fill-opacity="0.3"/>
+        </svg>
+    </div>
+    <div id="cafe-visit-symbol">
+        <svg height="20" width="20">
+            <circle cx="10" cy="10" r="8" stroke="black" stroke-width="1" fill="#22cc22" />
+        </svg>
+    </div>
+    <div id="cafe-no-visit-symbol">
+        <svg height="20" width="20">
+            <circle cx="10" cy="10" r="8" stroke="black" stroke-width="1" fill="#22cc22" fill-opacity="0.3"/>
+        </svg>
+    </div>
+</div>
+
+</div>
+
+
 {% endblock %}
 
 {% block scripts %}
