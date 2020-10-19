@@ -6,7 +6,6 @@ xhr.onreadystatechange = function () {
         var status = xhr.status;
         if (status === 0 || (status >= 200 && status < 400)) {
             // The request has been completed successfully
-            console.log(xhr.responseText);
             mapboxgl.accessToken = xhr.responseText;
         } else {
             console.log("mapbox token request failed")
