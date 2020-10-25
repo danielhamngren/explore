@@ -4,7 +4,6 @@ from .models import Places
 import requests
 import json
 import os
-from string import Template
 import osmjson2geojson
 
 
@@ -43,7 +42,10 @@ area(3600935416)->.searchArea;
 // get center points
 out center;"""
 
+
 def run(verbose=True):
+    # Note: it is better to use the function update_data for getting data from OSM.
+
     lm = LayerMapping(Places, restaurant_shp.as_posix(), places_mapping, transform=False)
     lm.save(strict=True, verbose=verbose)
 
@@ -53,15 +55,8 @@ def run(verbose=True):
     lm = LayerMapping(Places, fast_food_shp.as_posix(), places_mapping, transform=False)
     lm.save(strict=True, verbose=verbose)
 
-def web_load(verbose=True):
-    # 1. [x] Remove old file if any
-    # 2. [x] Make query
-    # 3. [x] convert osmjson to geojson
-    # 4. [x] Save geojson to file
-    # 5. [x] Check if any venue doesn't exist in new set.
-    # 6. [x] Mark those as inactive.
-    # 7. [x] Update and add new venues.
 
+def update_data(verbose=True):
     overpass_url = "http://overpass-api.de/api/interpreter"
 
     response = requests.get(overpass_url, params={'data': OVERPASS_QUERY})
@@ -89,4 +84,3 @@ def web_load(verbose=True):
 
     lm = LayerMapping(Places, temp_path.as_posix(), places_mapping, transform=False)
     lm.save(strict=True, verbose=verbose)
-
