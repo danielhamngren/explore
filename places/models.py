@@ -13,6 +13,7 @@ class Places(models.Model):
     name = models.CharField(max_length=254, null=True)
     website = models.CharField(max_length=254, null=True)
     cuisine = models.CharField(max_length=254, null=True)
+    active = models.BooleanField(default=True)
     geom = models.PointField()
 
     def __str__(self):
