@@ -77,7 +77,11 @@ def update_data(verbose=True):
 
     temp_path = Path(__file__).resolve().parent / 'data' / "temp.json"
 
-    os.remove(temp_path)
+    try:
+        os.remove(temp_path)
+    except FileNotFoundError:
+        print("no temp file at: ", temp_path)
+        print("but that is ok")
     geojson_file = open(temp_path, "w")
     geojson_file.write(json.dumps(geojson))
     geojson_file.close()
