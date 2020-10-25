@@ -22,7 +22,7 @@ def places(request):
     # # Left join by Björn
     # qset = Places.objects.annotate(nbr_visits=Count(Case(When(visits__user=request.user, then=1)))).all()
     # data = serializers.serialize('geojson', qset)
-    data = serializers.serialize('geojson', Places.objects.all())
+    data = serializers.serialize('geojson', Places.objects.filter(active=True))
     return HttpResponse(data, content_type='application/json')
 
 
