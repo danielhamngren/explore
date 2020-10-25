@@ -7,3 +7,4 @@ pytz==2020.1
 sqlparse==0.3.1
 whitenoise==5.2.0
 -e git+https://github.com/danielhamngren/osmjson2geojson@821f981cd8c378f26f47e8acd1f5d97ec2b8cd30#egg=osmjson2geojson
+requests==2.24.0
