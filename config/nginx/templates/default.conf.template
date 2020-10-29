@@ -1,6 +1,6 @@
 upstream web {
     ip_hash;
-    server web:443;
+    server web:8443;
 }
 
 # Requests using only IP returns 444 No Reponse

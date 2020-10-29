@@ -13,12 +13,10 @@ services:
 
   web:
     build: .
-    command: gunicorn --certfile=/etc/certs/${CERT_FILE} --keyfile=/etc/certs/${CERT_KEY_FILE} geodjango.wsgi -b 0.0.0.0:443
+    command: uwsgi --master --https 0.0.0.0:8443,/etc/certs/${CERT_FILE},/etc/certs/${CERT_KEY_FILE} --module geodjango.wsgi
     volumes:
       - .:/code
       - ${CERT_DIR}:/etc/certs
-    expose:
-      - "443"
     depends_on:
       - db
 
