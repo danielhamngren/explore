@@ -26,8 +26,8 @@ server {
 
     # SSL properties
     # (http://nginx.org/en/docs/http/configuring_https_servers.html)
-    ssl_certificate /etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${NGINX_HOST}/privkey.pem;
+    ssl_certificate /etc/certs/${CERT_FILE};
+    ssl_certificate_key /etc/certs/${CERT_KEY_FILE};
     root /usr/share/nginx/html;
 
     add_header Strict-Transport-Security "max-age=31536000" always;

@@ -13,10 +13,10 @@ services:
 
   web:
     build: .
-    command: gunicorn --certfile=/etc/certs/live/${EXTERNAL_HOST}/fullchain.pem --keyfile=/etc/certs/live/${EXTERNAL_HOST}/privkey.pem geodjango.wsgi -b 0.0.0.0:443 
+    command: gunicorn --certfile=/etc/certs/${CERT_FILE} --keyfile=/etc/certs/${CERT_KEY_FILE} geodjango.wsgi -b 0.0.0.0:443
     volumes:
       - .:/code
-      - /etc/letsencrypt:/etc/certs
+      - ${CERT_DIR}:/etc/certs
     expose:
       - "443"
     depends_on:
@@ -27,11 +27,13 @@ services:
     container_name: ng
     environment:
       NGINX_HOST: ${EXTERNAL_HOST}
+      CERT_FILE: ${CERT_FILE}
+      CERT_KEY_FILE: ${CERT_KEY_FILE}
     ports:
       - "443:443"
       - "80:80"
     volumes:
       - ./config/nginx/templates:/etc/nginx/templates
-      - /etc/letsencrypt:/etc/letsencrypt
+      - ${CERT_DIR}:/etc/certs
     depends_on:
       - web
