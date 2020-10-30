@@ -59,8 +59,10 @@ def run(verbose=True):
 def update_data(verbose=True):
     overpass_url = "http://overpass-api.de/api/interpreter"
 
+    print("Sending request to ", overpass_url)
     response = requests.get(overpass_url, params={'data': OVERPASS_QUERY})
 
+    print("Converting OSM json to geojson")
     geojson = osmjson2geojson.convert(json.loads(response.text))
 
     osm_id_list = []
@@ -71,10 +73,12 @@ def update_data(verbose=True):
     queryset = Places.objects.filter(id__in=osm_id_list)
     queryset.update(active=True)
 
+    print("Inactivate removed entries")
     # set inactive the ids not in the list
     queryset = Places.objects.all().exclude(id__in=osm_id_list)
     queryset.update(active=False)
 
+    print("Writing temporary geojson file")
     temp_path = Path(__file__).resolve().parent / 'data' / "temp.json"
 
     try:
@@ -86,5 +90,7 @@ def update_data(verbose=True):
     geojson_file.write(json.dumps(geojson))
     geojson_file.close()
 
+    print("Execute LayerMapping")
     lm = LayerMapping(Places, temp_path.as_posix(), places_mapping, transform=False)
+    print("Save entries to database")
     lm.save(strict=True, verbose=verbose)
