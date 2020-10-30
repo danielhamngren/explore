@@ -21,6 +21,7 @@ server {
     # Pass request to the web container
     location / {
         proxy_pass https://web/;
+        uwsgi_read_timeout 600;
     }    listen 443 ssl;
     server_name localhost;
 

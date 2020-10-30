@@ -13,7 +13,10 @@ services:
 
   web:
     build: .
-    command: uwsgi --master --https 0.0.0.0:8443,/etc/certs/${CERT_FILE},/etc/certs/${CERT_KEY_FILE} --module geodjango.wsgi
+    command: uwsgi --ini config/uwsgi/explore_uwsgi.ini
+    environment:
+      CERT_FILE: ${CERT_FILE}
+      CERT_KEY_FILE: ${CERT_KEY_FILE}
     volumes:
       - .:/code
       - ${CERT_DIR}:/etc/certs
