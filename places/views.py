@@ -8,6 +8,7 @@ from geodjango import settings
 from places.models import Places, Visit
 from django.db.models import F, Sum, Count, Case, When, OuterRef, Subquery
 from django.db.models.functions import Coalesce
+from django.views.decorators.cache import cache_page
 
 
 def current_datetime(request):
@@ -16,6 +17,7 @@ def current_datetime(request):
     return HttpResponse(html)
 
 
+@cache_page(60 * 60 * 8)
 def places(request):
     print(f"request user: {request.user}")
 
