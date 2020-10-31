@@ -10,4 +10,3 @@ COPY . /code/
 RUN mkdir -p /code/static
 RUN ./manage.py collectstatic --noinput
 RUN useradd --shell /bin/bash explore
-USER explore
