@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = [os.getenv('HOST')]
 CSRF_COOKIE_DOMAIN = os.getenv('EXTERNAL_HOST')
 
+CSRF_TRUSTED_ORIGINS = [os.getenv('EXTERNAL_HOST')]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
