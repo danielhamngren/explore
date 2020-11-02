@@ -8,6 +8,9 @@ world/
 # PyCharm files
 .idea/
 
+# vim .swp files
+*.swp
+
 # collected static dir
 static/
 
